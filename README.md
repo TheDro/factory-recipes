@@ -1,24 +1,13 @@
-# recipes
+# Satisfactory Recipes 🏭
+This is an app that converts recipes from Satisfactory (Release 4) down to their raw resources. You can uncheck recipes to prevent them from being used by others. For example, unchecking screws will allow you to see how many screws are needed in a supercomputer instead of just showing iron ore. The calulator includes alternate recipes. [Try it out!](https://thedro.github.io/satisfactory-recipes)
 
-## Project setup
+## Important commands
+To run and build locally:
 ```
 npm install
-```
-
-### Compiles and hot-reloads for development
-```
 npm run serve
-```
-
-### Compiles and minifies for production
-```
 npm run build
 ```
 
-### Lints and fixes files
-```
-npm run lint
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+## How to deploy
+Just run `deploy.sh` to deploy the app to https://thedro.github.io/satisfactory-recipes/
