@@ -45,6 +45,7 @@ import {recipes} from './recipes'
 // import {altRecipes} from "./alt-recipes";
 import {reactive, computed} from 'vue'
 import _ from 'lodash'
+import './dyson'
 
 recipes.forEach((recipe) => {
   recipe.active = !recipe.altName
