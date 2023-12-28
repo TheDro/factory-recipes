@@ -1,6 +1,9 @@
-import _ from 'lodash'
-import JSON5 from 'json5'
-window.JSON5 = JSON5
+// run with `node dyson.js`
+
+let _ = require('lodash')
+let JSON5 = require('json5')
+const fs = require('node:fs')
+
 
 let game_items = [
     {id: 1000,
@@ -2072,9 +2075,6 @@ let game_recipes = [
     },
 ]
 
-window.game_items = game_items
-window.game_recipes = game_recipes
-
 let recipes = []
 recipes.push(...game_items
     .filter(item => item.type === 'RESOURCE')
@@ -2089,7 +2089,7 @@ recipes.push(...game_items
 
 
 game_recipes.forEach((rawRecipe) => {
-    if (rawRecipe.outputs.length > 2) {
+    if (rawRecipe.outputs.length > 2) { // more than 1 output
         return recipes.push(...splitter(rawRecipe))
     }
 
@@ -2106,8 +2106,13 @@ function remapRecipe(rawRecipe) {
         let quantity = input[1]/outputQuantity
         ingredients.push({name: inputItem.name, quantity})
     })
-    let altName = rawRecipe.name.includes("(Advanced)") ? rawRecipe.name : null
-
+    let altName = null;
+    if (rawRecipe.name.includes("(Advanced)") || rawRecipe.name.includes("(Original)")) {
+        altName = rawRecipe.name
+    } else if (rawRecipe.name === 'Mass-Energy Storage' && outputItem.name === 'Hydrogen') {
+        altName = 'Mass-Energy Storage'
+    }
+    
     return {
         name: outputItem.name,
         altName,
@@ -2140,9 +2145,7 @@ function splitter(rawRecipe) {
     return recipes
 }
 
+recipes = _.sortBy(recipes, 'name')
 
 
-
-
-window.dysonRecipes = recipes
-// console.log(JSON5.stringify(recipes, null, 2))
+fs.writeFileSync('src/exported-dyson-recipes.js', "export default " + JSON5.stringify(recipes, null, 2))
