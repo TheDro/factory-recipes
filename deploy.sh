@@ -20,8 +20,8 @@ git commit -m 'deploy'
 # git push -f git@github.com:<USERNAME>/<USERNAME>.github.io.git master
 
 # if you are deploying to https://<USERNAME>.github.io/<REPO>
-git push -f git@github.com:TheDro/satisfactory-recipes.git master:gh-pages
+git push -f git@github.com:TheDro/factory-recipes.git master:gh-pages
 
 cd -
 
-echo https://thedro.github.io/satisfactory-recipes
+echo https://thedro.github.io/factory-recipes
