@@ -31347,6 +31347,7 @@ let rawRecipes = {
 
 let translations = {
   Cement: "Concrete",
+  GoldIngot: "Caterium Ingot",
   Gunpowder: "BlackPowder",
   GunpowderMK2: "SmokelessPowder",
   IronScrew: "Screw",
