@@ -57,7 +57,7 @@ let recipes = [{
     ingredients: [],
 },{
     name: 'computer',
-    ingredients: [{name: 'circuitBoard', quantity: 10},{name: 'cable', quantity: 9},{name: 'plastic', quantity:18},{name: 'screw', quantity: 130}],
+    ingredients: [{name: 'circuitBoard', quantity: 4},{name: 'cable', quantity: 8},{name: 'plastic', quantity:16}],
 },{
     name: 'concrete',
     ingredients: [{name: 'limestone', quantity: 3}],
@@ -90,7 +90,7 @@ let recipes = [{
     ingredients: [{name: 'stator', quantity: 3/2},{name: 'aiLimiter', quantity: 1}],
 },{
     name: 'encasedIndustrialBeam',
-    ingredients: [{name: 'concrete', quantity: 5},{name: 'steelBeam', quantity: 4}],
+    ingredients: [{name: 'concrete', quantity: 6},{name: 'steelBeam', quantity: 3}],
 },{
     name: 'encasedUraniumCell',
     ingredients: [{name: 'uranium', quantity: 50/25},{name: 'concrete', quantity: 15/25},{name: 'sulfuricAcid', quantity: 40/25},{name: 'sulfuricAcid', quantity: -10/25}],
@@ -108,7 +108,7 @@ let recipes = [{
     ingredients: [{name: 'alcladAluminumSheet', quantity: 4},{name: 'copperSheet', quantity: 9/2}],
 },{
     name: 'heavyModularFrame',
-    ingredients: [{name: 'modularFrame', quantity: 5},{name: 'steelPipe', quantity: 15},{name: 'encasedIndustrialBeam', quantity: 5},{name: 'screw', quantity: 100}],
+    ingredients: [{name: 'modularFrame', quantity: 5},{name: 'steelPipe', quantity: 20},{name: 'encasedIndustrialBeam', quantity: 5},{name: 'screw', quantity: 120}],
 },{
     name: 'highSpeedConnector',
     ingredients: [{name: 'quickwire', quantity: 56},{name: 'cable', quantity: 10},{name: 'circuitBoard', quantity: 1}],
@@ -253,7 +253,7 @@ let recipes = [{
 },{
   name: 'aluminumCasing',
   altName: 'Alclad Casing',
-  ingredients: [{name: 'aluminumIngot', quantity: 112.5/112.5}, {name: 'copperIngot', quantity: 75/112.5}]
+  ingredients: [{name: 'aluminumIngot', quantity: 150/112.5}, {name: 'copperIngot', quantity: 75/112.5}]
 },{
   name: 'aluminumIngot',
   altName: 'Pure Aluminum Ingot',
@@ -377,7 +377,7 @@ let recipes = [{
 },{
   name: 'encasedIndustrialBeam',
   altName: 'Encased Industrial Pipe',
-  ingredients: [{name: 'steelPipe', quantity: 28/4}, {name: 'concrete', quantity: 20/4}]
+  ingredients: [{name: 'steelPipe', quantity: 6}, {name: 'concrete', quantity: 5}]
 },{
   name: 'encasedPlutoniumCell',
   altName: 'Instant Plutonium Cell',
@@ -501,11 +501,11 @@ let recipes = [{
 },{
   name: 'reinforcedIronPlate',
   altName: 'Stitched Iron Plate',
-  ingredients: [{name: 'ironPlate', quantity: 18.8/5.6}, {name: 'copperWire', quantity: 37.5/5.6}]
+  ingredients: [{name: 'ironPlate', quantity: 18.75/5.625}, {name: 'copperWire', quantity: 37.5/5.625}]
 },{
   name: 'reinforcedIronPlate',
   altName: 'Adhered Iron Plate',
-  ingredients: [{name: 'ironPlate', quantity: 11.3/3.8}, {name: 'rubber', quantity: 3.8/3.8}]
+  ingredients: [{name: 'ironPlate', quantity: 11.25/3.75}, {name: 'rubber', quantity: 3.75/3.75}]
 },{
   name: 'rotor',
   altName: 'Copper Rotor',
@@ -550,6 +550,10 @@ let recipes = [{
   name: 'steelIngot',
   altName: 'Coke Steel Ingot',
   ingredients: [{name: 'ironOre', quantity: 75/100}, {name: 'petroleumCoke', quantity: 75/100}]
+},{
+  name: 'steelBeam',
+  altName: 'Molded Beam',
+  ingredients: [{name: 'steelIngot', quantity: 24/9}, {name: 'concrete', quantity: 16/9}]
 },{
   name: 'supercomputer',
   altName: 'OC Supercomputer',

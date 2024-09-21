@@ -5,7 +5,7 @@
 <script>
 import 'marx-css/css/marx.css'
 import Recipes from './Recipes.vue'
-import {recipes as satisfactoryRecipes} from './satisfactory-recipes.js'
+import {recipes as satisfactoryRecipes} from './exported-satisfactory-recipes.js'
 import dysonRecipes from './exported-dyson-recipes.js'
 
 export default {

@@ -43,7 +43,6 @@
 import {reactive, computed} from 'vue'
 import _ from 'lodash'
 
-
 export default {
   props: {
     name: String,
@@ -97,8 +96,6 @@ export default {
         }
         return {name: recipe.name, ingredients: oldIngredients}
       })
-
-
 
       return baseRecipes
     })
