@@ -29,7 +29,7 @@
         <td>
           <ul class="m-0">
             <li :class="{error: !!ingredient.warning}"
-              v-for="(ingredient, index) in convertedRecipes[index].ingredients" :key="index">
+              v-for="(ingredient, index) in state.baseRecipes[index]?.ingredients" :key="index">
               {{round(ingredient.quantity, 2)}} x {{formatName(ingredient.name)}}
             </li>
           </ul>
@@ -40,7 +40,7 @@
 </template>
 
 <script>
-import {reactive, computed} from 'vue'
+import {reactive, watch} from 'vue'
 import _ from 'lodash'
 
 export default {
@@ -57,13 +57,17 @@ export default {
 
     let state = reactive({
       recipes: recipes,
+      baseRecipes: [],
       consolidate: true,
       alternates: false
     })
 
-    let convertedRecipes = computed(() => {
+    refresh()
 
-      let baseRecipes = state.recipes.map((recipe) => {
+    watch(() => [state.consolidate, state.alternates], refresh)
+
+    function refresh() {
+      state.baseRecipes = state.recipes.map((recipe) => {
         let baseRecipe = _.cloneDeep(recipe)
         let oldIngredients = baseRecipe.ingredients
         for (let i=0; i<10; i++) {
@@ -97,8 +101,8 @@ export default {
         return {name: recipe.name, ingredients: oldIngredients}
       })
 
-      return baseRecipes
-    })
+    }
+
 
     function consolidate(ingredients) {
       let newIngredients = []
@@ -124,16 +128,17 @@ export default {
 
     function onCheckRecipe(e, targetRecipe) {
       targetRecipe.active = e.target.checked
-      if (!targetRecipe.active) return
-
-      state.recipes.forEach((recipe) => {
-        if (recipe.name === targetRecipe.name && recipe !== targetRecipe) {
-          recipe.active = false
-        }
-      })
+      if (targetRecipe.active) {
+        state.recipes.forEach((recipe) => {
+          if (recipe.name === targetRecipe.name && recipe !== targetRecipe) {
+            recipe.active = false
+          }
+        })
+      }
+      refresh()
     }
 
-    return {state, round, convertedRecipes, formatName, onCheckRecipe}
+    return {state, round, formatName, onCheckRecipe}
   }
 }
 </script>
