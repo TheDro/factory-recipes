@@ -5,6 +5,10 @@
     <label>consolidate ingredients</label>
     <input type="checkbox" v-model="state.alternates" />
     <label>include alternates</label>
+    <div>
+      <label for="search">Ingredient Search</label>
+      <input id="search" type="text" v-model="state.searchString" @input="debouncedRefresh()" />
+    </div>
 
     <table class="condensed">
       <tr>
@@ -42,6 +46,7 @@
 <script>
 import {reactive, watch} from 'vue'
 import _ from 'lodash'
+import Fuse from 'fuse.js'
 
 export default {
   props: {
@@ -62,17 +67,20 @@ export default {
       alternates: false,
       searchString: "",
       allSearchTerms: new Set(),
+      fuse: new Fuse(),
     })
 
-    refresh()
+    refresh(true)
 
     watch(() => [state.consolidate, state.alternates], refresh)
 
-    function refresh() {
+    function refresh(init = false) {
       state.recipes.forEach((recipe) => {
         let oldIngredients = _.cloneDeep(recipe.ingredients)
         recipe.searchTerms = {[recipe.name]: -1}
-        state.allSearchTerms.add(recipe.name)
+        if (init) {
+          state.allSearchTerms.add(recipe.name)
+        }
         for (let i=0; i<10; i++) {
 
           let newIngredients = oldIngredients.map((ingredient) => {
@@ -104,13 +112,27 @@ export default {
         recipe.baseIngredients = oldIngredients
       })
 
+      let searchIngredient;
+      if (state.searchString.length > 1) {
+        searchIngredient = state.fuse.search(state.searchString)[0]?.item
+      }
       state.recipes = state.recipes.sort((a,b) => {
+        if (searchIngredient) {
+          let result = _.defaultTo(a.searchTerms[searchIngredient], 10) - _.defaultTo(b.searchTerms[searchIngredient], 10)
+          if (result !== 0) return result
+        }
         if (a.name < b.name) return -1
         if (a.name > b.name) return 1
         if ((a.altName || "") < (b.altName || "")) return -1
         if ((a.altName || "") > (b.altName || "")) return 1
         return 0
       })
+
+      if (init) {
+        state.fuse = new Fuse(Array.from(state.allSearchTerms), {
+          includeScore: true,
+        })
+      }
 
     }
 
@@ -150,7 +172,8 @@ export default {
     }
     window.state = state
 
-    return {state, round, formatName, onCheckRecipe}
+    let debouncedRefresh = _.debounce(refresh, 150)
+    return {state, round, formatName, onCheckRecipe, refresh, debouncedRefresh}
   }
 }
 </script>
@@ -205,6 +228,12 @@ input[type="checkbox"] {
 
 tr.alternative {
   color: #ffa
+}
+
+input[type="text"],
+input[type="text"]:focus {
+  background-color: #222;
+  color: white;
 }
 
 </style>

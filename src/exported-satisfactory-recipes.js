@@ -31356,6 +31356,7 @@ let translations = {
   GoldIngot: "CateriumIngot",
   Gunpowder: "BlackPowder",
   GunpowderMK2: "SmokelessPowder",
+	HighSpeedWire: "Quickwire",
   IronScrew: "Screw",
   LiquidFuel: "Fuel",
   LiquidOil: "CrudeOil",
