@@ -31346,8 +31346,14 @@ let rawRecipes = {
 
 
 let translations = {
+  AluminumPlate: "AlcladAluminumSheet",
+  AluminumPlateReinforced: "HeatSink",
   Cement: "Concrete",
-  GoldIngot: "Caterium Ingot",
+  CircuitBoardHighSpeed: "HighSpeedConnector",
+  ComputerSuper: "Supercomputer",
+  CopperDust: "CopperPowder",
+	FicsiteMesh: "FicsiteTrigon",
+  GoldIngot: "CateriumIngot",
   Gunpowder: "BlackPowder",
   GunpowderMK2: "SmokelessPowder",
   IronScrew: "Screw",
