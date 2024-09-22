@@ -28,9 +28,9 @@
         </td>
         <td>
           <ul class="m-0">
-            <li :class="{error: !!ingredient.warning}"
-              v-for="(ingredient, index) in state.baseRecipes[index]?.ingredients" :key="index">
-              {{round(ingredient.quantity, 2)}} x {{formatName(ingredient.name)}}
+            <li :class="{error: !!baseIngredient.warning}"
+              v-for="(baseIngredient, index) in recipe.baseIngredients" :key="index">
+              {{round(baseIngredient.quantity, 2)}} x {{formatName(baseIngredient.name)}}
             </li>
           </ul>
         </td>
@@ -53,13 +53,15 @@ export default {
     let recipes = _.cloneDeep(props.recipes)
     recipes.forEach((recipe) => {
       recipe.active = !recipe.altName
+      recipe.baseIngredients = []
     })
 
     let state = reactive({
       recipes: recipes,
-      baseRecipes: [],
       consolidate: true,
-      alternates: false
+      alternates: false,
+      searchString: "",
+      allSearchTerms: new Set(),
     })
 
     refresh()
@@ -67,21 +69,22 @@ export default {
     watch(() => [state.consolidate, state.alternates], refresh)
 
     function refresh() {
-      state.baseRecipes = state.recipes.map((recipe) => {
-        let baseRecipe = _.cloneDeep(recipe)
-        let oldIngredients = baseRecipe.ingredients
+      state.recipes.forEach((recipe) => {
+        let oldIngredients = _.cloneDeep(recipe.ingredients)
+        recipe.searchTerms = {[recipe.name]: -1}
+        state.allSearchTerms.add(recipe.name)
         for (let i=0; i<10; i++) {
 
           let newIngredients = oldIngredients.map((ingredient) => {
-            let nextRecipe = _.find(recipes, {name: ingredient.name, active: true})
-            if (ingredient.quantity < 0) {
-              return ingredient
+            if (_.isNil(recipe.searchTerms[ingredient.name])) {
+              recipe.searchTerms[ingredient.name] = i
             }
+            let nextRecipe = _.find(recipes, {name: ingredient.name, active: true})
             if (!nextRecipe) {
               ingredient.warning = "Couldn't find match"
               return ingredient
             }
-            if (nextRecipe.ingredients.length === 0 ) { //|| ingredient.quantity < 0
+            if (nextRecipe.ingredients.length === 0 || ingredient.quantity < 0 ) { 
               return ingredient
             }
             return nextRecipe.ingredients.map((ing) => {
@@ -98,7 +101,15 @@ export default {
           }
 
         }
-        return {name: recipe.name, ingredients: oldIngredients}
+        recipe.baseIngredients = oldIngredients
+      })
+
+      state.recipes = state.recipes.sort((a,b) => {
+        if (a.name < b.name) return -1
+        if (a.name > b.name) return 1
+        if ((a.altName || "") < (b.altName || "")) return -1
+        if ((a.altName || "") > (b.altName || "")) return 1
+        return 0
       })
 
     }
@@ -137,6 +148,7 @@ export default {
       }
       refresh()
     }
+    window.state = state
 
     return {state, round, formatName, onCheckRecipe}
   }
