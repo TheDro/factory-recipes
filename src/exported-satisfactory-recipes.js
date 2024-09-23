@@ -31360,7 +31360,9 @@ let translations = {
   IronScrew: "Screw",
   LiquidFuel: "Fuel",
   LiquidOil: "CrudeOil",
+	ModularFrameHeavy: "HeavyModularFrame",
 	ModularFrameLightweight: "RadioControlUnit",
+	MotorLightweight: "TurboMotor",
   OreBauxite: "Bauxite",
   OreCopper: "CopperOre",
   OreGold: "Caterium",
@@ -31382,6 +31384,7 @@ let translations = {
   SpaceElevatorPart_9: "NuclearPasta",
   SteelPlateReinforced: "EncasedIndustrialBeam",
   Stone: "Limestone",
+	TemporalProcessor: "NeuralQuantumProcessor"
 }
 
 let ores = [

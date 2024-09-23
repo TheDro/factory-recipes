@@ -1,5 +1,5 @@
 # Satisfactory Recipes 🏭
-This is an app that converts recipes from Satisfactory (Release 4) down to their raw resources. You can uncheck recipes to prevent them from being used by others. For example, unchecking screws will allow you to see how many screws are needed in a supercomputer instead of just showing iron ore. The calulator includes alternate recipes. [Try it out!](https://thedro.github.io/factory-recipes)
+This is an app that converts recipes from Satisfactory down to their raw resources. You can uncheck recipes to prevent them from being converted down the dependency chain. For example, unchecking screws will allow you to see how many screws are needed in a supercomputer instead of just showing iron ore. The calulator includes alternate recipes. [Try it out!](https://thedro.github.io/factory-recipes)
 
 ## Important commands
 To run and build locally:
