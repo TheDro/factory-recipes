@@ -31360,6 +31360,7 @@ let translations = {
   IronScrew: "Screw",
   LiquidFuel: "Fuel",
   LiquidOil: "CrudeOil",
+	ModularFrameLightweight: "RadioControlUnit",
   OreBauxite: "Bauxite",
   OreCopper: "CopperOre",
   OreGold: "Caterium",
