@@ -31352,6 +31352,7 @@ let translations = {
   CircuitBoardHighSpeed: "HighSpeedConnector",
   ComputerSuper: "Supercomputer",
   CopperDust: "CopperPowder",
+	CrystalShard: "PowerShard",
 	FicsiteMesh: "FicsiteTrigon",
   GoldIngot: "CateriumIngot",
   Gunpowder: "BlackPowder",
@@ -31360,6 +31361,7 @@ let translations = {
   IronScrew: "Screw",
   LiquidFuel: "Fuel",
   LiquidOil: "CrudeOil",
+	ModularFrameFused: "FusedModularFrame",
 	ModularFrameHeavy: "HeavyModularFrame",
 	ModularFrameLightweight: "RadioControlUnit",
 	MotorLightweight: "TurboMotor",
@@ -31420,6 +31422,9 @@ for (let recipeName in rawRecipes) {
   if (recipeName.match(/Cartridge/)) continue
   if (recipeName.match(/Protein/)) continue
   if (recipeName.match(/Biomass/)) continue
+	if (recipeName.match(/PowerCrystalShard/)) continue
+	if (recipeName.match(/Nobelisk/)) continue
+	if (recipeName.match(/Rebar/)) continue
   if (sourceRecipe.ingredients.length === 1 && sourceRecipe.ingredients[0].item.match(/Packaged/)) continue
   if (sourceRecipe.producedIn.length < 1) continue
   
