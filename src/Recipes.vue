@@ -5,6 +5,18 @@
     <label>consolidate ingredients</label>
     <input type="checkbox" v-model="state.alternates" />
     <label>include alternates</label>
+    <a @click="state.isHelpOpen = !state.isHelpOpen" class="mx-2">Help</a>
+    <div class="accordion p-4" style="color: #bbb" :class="{open: state.isHelpOpen}">
+      <p>
+        This tool converts recipes all the way down to their base ingredients. Deselecting a recipe will remove it from the available recipes, and prevent it from being used to continue converting down the chain.
+      </p><p>
+        Checking "include alternates" will display the alternate recipes. 
+      </p><p>
+        Unchecking "consolidate ingredients" will avoid merging ingredients of the same name from different recipe chains.
+      </p><p>
+        The search bar finds an ingredient most similar to your text input and then sorts all recipes based on how high the ingredient is in the recipe chain.
+      </p>
+    </div>
     <div>
       <label for="search">Ingredient Search</label>
       <input id="search" type="text" v-model="state.searchString" @input="debouncedRefresh()" />
@@ -68,6 +80,7 @@ export default {
       searchString: "",
       allSearchTerms: new Set(),
       fuse: new Fuse(),
+      isHelpOpen: false,
     })
 
     refresh(true)
@@ -196,6 +209,29 @@ export default {
 .mx-2 {
   margin-left: 0.5rem;
   margin-right: 0.5rem;
+}
+
+.py-2 {
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+}
+
+.p-2 {
+  padding: 0.5rem;
+}
+
+.p-4 {
+  padding: 1rem;
+}
+
+
+
+.accordion {
+  display: none;
+}
+
+.accordion.open {
+  display: block;
 }
 
 .condensed th,
