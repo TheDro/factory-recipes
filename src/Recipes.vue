@@ -25,8 +25,8 @@
     <table class="condensed">
       <tr>
         <th>Material</th>
-        <th>Starting Recipe</th>
-        <th>Converted Recipe</th>
+        <th>Recipe Ingredients</th>
+        <th>Base Ingredients</th>
       </tr>
       <tr :class="{alternative: !!recipe.altName}" v-for="(recipe, index) in state.recipes" :key="index" 
         v-show="(!recipe.altName || state.alternates) && recipe.ingredients.length > 0">
